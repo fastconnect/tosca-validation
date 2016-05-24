@@ -1,0 +1,26 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+metadata:
+  oasis.testAssertion.id: 006-imports-8
+  oasis.testAssertion.description: Parsing an import from a missing repository SHOULD fail.
+  oasis.testAssertion.target: Parser-Validator
+  oasis.testAssertion.predicate: parsing fails
+  oasis.testAssertion.prescription_level: mandatory
+  oasis.testAssertion.parsing_result: >
+    WARNING, Repository 'my_git_repository' specified in import is not defined.
+    ERROR, Type my_company.my_types.my_type cannot be found within the archive or dependencies.
+  oasis.testAssertion.normativeSource.refSourceItem.documentId: tosca_simple_yaml_1_0
+  oasis.testAssertion.normativeSource.refSourceItem.versionId: 1.0.0
+  oasis.testAssertion.normativeSource.textSourceItem.section: 3.5.7, 3.9.3.9
+
+
+imports:
+  - my-types:
+      file: master/parsing/6-imports/archives/my-types/my-types.yml
+      repository: my_git_repository
+
+topology_template:
+  node_templates:
+    my_node:
+      type: my_company.my_types.my_type
+      description: Template for an instance of my_company.my_types.my_type defined in the imported file

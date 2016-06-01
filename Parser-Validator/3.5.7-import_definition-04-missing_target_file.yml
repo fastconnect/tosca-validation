@@ -1,0 +1,31 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+metadata:
+  oasis.testAssertion.id: 3.5.7-import_definition-04-missing_target_file
+  oasis.testAssertion.description: >
+    An import that defines a file that cannot be reached is an error that can be considered as a warning and not an error.
+    If some types are not found (possibly because of the missing import) this is an error.
+  oasis.testAssertion.prerequisite: >
+    TODO Add reference to the node template parsing test.
+    TODO Add reference to the node type parsing test.
+  oasis.testAssertion.target: a tosca template that defines an import definition and the relative imported file does not exist.
+  oasis.testAssertion.predicate: >
+    When parsing the template
+    assert raises the warning 'WarnMissingImport'
+    assert raises the error 'MissingNodeType'
+  oasis.testAssertion.tags.errors: WarnMissingImport, MissingNodeType
+  oasis.testAssertion.tags.errors_lines: 25, 30
+  oasis.testAssertion.prescription_level: mandatory
+  oasis.testAssertion.normativeSource.refSourceItem.documentId: tosca_simple_yaml_1_0
+  oasis.testAssertion.normativeSource.refSourceItem.versionId: 1.0.0
+  oasis.testAssertion.normativeSource.textSourceItem.section: 3.5.7, 3.9.3.9
+  oasis.testAssertion.tags.conformancetarget: Parser-Validator
+
+imports:
+  - my-types: dependencies/my-types/my-types-missing.yml
+
+topology_template:
+  node_templates:
+    my_node:
+      type: mycompany.types.MyType
+      description: Template for an instance of mycompany.types.MyType defined in the imported file

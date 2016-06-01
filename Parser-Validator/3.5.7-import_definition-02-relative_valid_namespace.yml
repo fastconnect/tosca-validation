@@ -1,0 +1,31 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+description: This test is NON normative as there is right now no specification or samples on how namespace_prefix should be used when using a type from a namespaced import.
+
+metadata:
+  oasis.testAssertion.id: 3.5.7-import_definition-02-relative_valid_namespace
+  oasis.testAssertion.description: Parsing a multi-line import with namespace from a relative file SHOULD be successful.
+  oasis.testAssertion.prerequisite: >
+    TODO Add reference to the node template parsing test.
+    TODO Add reference to the node type parsing test.
+  oasis.testAssertion.target: a tosca template that defines a valid import definition with namespace pointing to a relative file. The imported definition defines a mycompany.types.MyType node type that is used to define a node template in the importing tosca template. The node template defines the type from using the namespace prefix.
+  oasis.testAssertion.predicate: >
+    When parsing the template
+    assert there is no errors
+  oasis.testAssertion.prescription_level: mandatory
+  oasis.testAssertion.normativeSource.refSourceItem.documentId: tosca_simple_yaml_1_0
+  oasis.testAssertion.normativeSource.refSourceItem.versionId: 1.0.0
+  oasis.testAssertion.normativeSource.textSourceItem.section: 3.5.7, 3.5.7.2.2, 3.9.3.9
+  oasis.testAssertion.tags.conformancetarget: Parser-Validator
+
+imports:
+  - my-types:
+      file: dependencies/my-types/my-types.yml
+      namespace_uri: http://mycompany.com/my-types/v1
+      namespace_prefix: mycompany
+
+topology_template:
+  node_templates:
+    my_node:
+      type: mycompany:mycompany.types.MyType
+      description: Template for an instance of mycompany.types.MyType defined in the imported file

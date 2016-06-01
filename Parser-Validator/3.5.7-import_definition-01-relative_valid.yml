@@ -1,0 +1,26 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+metadata:
+  oasis.testAssertion.id: 3.5.7-import_definition-01-relative_valid
+  oasis.testAssertion.description: Parsing an import from a relative file SHOULD be successful.
+  oasis.testAssertion.prerequisite: >
+    TODO Add reference to the node template parsing test.
+    TODO Add reference to the node type parsing test.
+  oasis.testAssertion.target: a tosca template that defines a valid import definition pointing to a relative file. The imported definition defines a mycompany.types.MyType node type that is used to define a node template in the importing tosca template.
+  oasis.testAssertion.predicate: >
+    When parsing the template
+    assert there is no errors
+  oasis.testAssertion.prescription_level: mandatory
+  oasis.testAssertion.normativeSource.refSourceItem.documentId: tosca_simple_yaml_1_0
+  oasis.testAssertion.normativeSource.refSourceItem.versionId: 1.0.0
+  oasis.testAssertion.normativeSource.textSourceItem.section: 3.5.7, 3.5.7.2.1, 3.9.3.9
+  oasis.testAssertion.tags.conformancetarget: Parser-Validator
+
+imports:
+  - my-types: dependencies/my-types/my-types.yml
+
+topology_template:
+  node_templates:
+    my_node:
+      type: mycompany.types.MyType
+      description: Template for an instance of mycompany.types.MyType defined in the imported file

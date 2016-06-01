@@ -1,0 +1,23 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+metadata:
+  oasis.testAssertion.id: 3.5.7-import_definition-03-missing_file_keyname
+  oasis.testAssertion.description: Parsing an import should fail if no 'file' is defined.
+  oasis.testAssertion.prerequisite: >
+    TODO Add reference to the node template parsing test.
+    TODO Add reference to the node type parsing test.
+  oasis.testAssertion.target: a tosca template that defines an import definition missing the required file keyname.
+  oasis.testAssertion.predicate: >
+    When parsing the template
+    assert raises the error 'MissingRequiredKeyname'
+  oasis.testAssertion.tags.errors: MissingRequiredKeyname
+  oasis.testAssertion.tags.errors_lines: 22
+  oasis.testAssertion.prescription_level: mandatory
+  oasis.testAssertion.normativeSource.refSourceItem.documentId: tosca_simple_yaml_1_0
+  oasis.testAssertion.normativeSource.refSourceItem.versionId: 1.0.0
+  oasis.testAssertion.normativeSource.textSourceItem.section: 3.5.7, 3.5.7.2.2, 3.9.3.9
+  oasis.testAssertion.tags.conformancetarget: Parser-Validator
+
+imports:
+  - my_types: # file is missing and required
+      namespace_prefix: my_types
